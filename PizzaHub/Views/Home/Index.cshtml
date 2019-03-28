@@ -1,8 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Dictionary<int, string> cities = ViewData["cities"] as Dictionary<int, string>;
+
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if(cities != null)
+    {
+    <form action="/home/city">
+        <select name="id">
+            @foreach (var city in cities)
+            {
+                <option value="@city.Key">@city.Value</option>
+            }
+        </select>
+        <input type="submit" />
+    </form>
+    }
 </div>
+
+@section Scripts{ 
+    <script>
+        window.navigator.geolocation.getCurrentPosition(function (position) {
+            fetch("/home/getLocation?latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude).then(function (response) {
+                response.text().then(function (text) {
+                    window.location = "/home/city/" + text;
+                });
+            });
+        })
+    </script>
+}
