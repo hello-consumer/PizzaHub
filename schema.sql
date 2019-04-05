@@ -14,9 +14,9 @@ CREATE TABLE City
 )
 
 INSERT INTO City(Name, Latitude, Longitude) VALUES
-('Chicago', 41, 87),
-('Indianapolis', 46, 86),
-('Milwaukee', 43, 87)
+('Chicago', 41, -87),
+('Indianapolis', 46, -86),
+('Milwaukee', 43, -87)
 
 --To represent the 1-to-many relationship between cities and restaurants, I add City Name to
 --restaurant
